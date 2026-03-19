@@ -11,12 +11,17 @@ const servicios = [
     { nombre: "Software", precio: 5000, descripcion: "Sistemas de software para empresas (ventas, incentarios, entre otros", imagen: "https://s3.amazonaws.com/www-itopvpn-com/blog/20250411/1744351579624391.png" },
     { nombre: "Redes", precio: 5000, descripcion: "instalación de routers y switches, seguridad en redes", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRlnkXchjyDCsLx4jK3JzOmCILVVX6-5YPKA&s" }
 ];
+// DATOS
+const equipo = [
+    {nombre: "Diana Laura Campos Rosas", rol: "Backend developer", bio: "Enfocada en el desarrollo backend y la gestión de bases de datos relacionales.", foto: "foto de perfil - Diana.jpeg"},
+    {nombre: "Leonardo Flores Vitela", rol: "Web developer", bio: "Enfocado en el desarrollo de interfaces web atractivas y funcionales.", foto: "foto de perfil - Leo.jpeg"}
+]
 
-// Referenciar con base de html
-const contenedor = document.getElementById('contenedor-servicios');
-
-// Nuestro bucle dinámico
 function generarServicios(){
+    // Referenciar con base de html
+    const contenedor = document.getElementById('contenedor-servicios');
+    if (!contenedor) return;
+    // Nuestro bucle dinámico
     servicios.forEach(servicio => {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta-servicio';
@@ -71,6 +76,26 @@ function generarNav() {
     `;
 }
 
+function generarHeader() {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+    const pagina = window.location.pathname.split("/").pop() || "index.html";
+
+    if (pagina === "index.html" || pagina === "") {
+        header.className = "hero-index";
+        header.innerHTML = `
+            <div class="hero-content">
+                <h1>A tu servicio</h1>
+                <p>¡Conócenos!</p>
+                <a href="servicios.html" class="btn-primary">Explorar servicios</a>
+            </div>`;
+    } else {
+        header.innerHTML = `
+            <h1>Servicios de Ingenieros en Sistemas Computacionales</h1>
+            <p>Soluciones para tu negocio</p>`;
+    }
+}
+
 function generarFooter() {
     const footerContainer = document.getElementById('main-footer');
     if (!footerContainer) return;
@@ -82,9 +107,35 @@ function generarFooter() {
         </div>
     `;
 }
+function generarSeccionEquipo() {
+    const seccion = document.getElementById('seccion-equipo-completa');
+    if (!seccion) return;
+
+    seccion.className = "seccion-equipo";
+    seccion.innerHTML = `
+        <h2 class="titulo-seccion">Nuestra experiencia</h2>
+        <p class="subtitulo-seccion">Estudiantes de 6º Semestre - ISC</p>
+        <div id="contenedor-equipo" class="grid-equipo"></div>`;
+
+    const contenedorCards = document.getElementById('contenedor-equipo');
+    equipo.forEach(miembro => {
+        const art = document.createElement('article');
+        art.className = "tarjeta-miembro";
+        art.innerHTML = `
+            <img src="${miembro.foto}" alt="${miembro.nombre}" class="foto-perfil">
+            <div class="info-miembro">
+                <h3>${miembro.nombre}</h3>
+                <p class="rol">${miembro.rol}</p>
+                <p class="bio">${miembro.bio}</p>
+            </div>`;
+        contenedorCards.appendChild(art);
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     generarNav();
-    generarFooter();
+    generarHeader();
+    generarSeccionEquipo();
     generarServicios();
+    generarFooter();
 });

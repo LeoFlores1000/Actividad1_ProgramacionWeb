@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Flocam - Alta de Servicio</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <nav id="main-nav"></nav>
+
+    <header id="main-header">
+        <h1>Registrar Nuevo Servicio</h1>
+        <p>Completa el formulario para añadir un servicio al catálogo</p>
+    </header>
+
+    <main class="container">
+        <form id="formulario-alta" class="form-servicios">
+            <div class="campo">
+                <label for="nombre">Nombre del Servicio:</label>
+                <input type="text" id="nombre" required placeholder="Ej. Auditoría de Redes">
+            </div>
+            <div class="campo">
+                <label for="precio">Precio ($):</label>
+                <input type="number" id="precio" required placeholder="Ej. 1500">
+            </div>
+            <div class="campo">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" required placeholder="Describe brevemente el servicio"></textarea>
+            </div>
+            <div class="campo">
+                <label for="imagen">URL de la Imagen:</label>
+                <input type="url" id="imagen" required placeholder="https://enlace-a-tu-imagen.jpg">
+            </div>
+            <button type="submit" class="btn-primary">Guardar Servicio</button>
+        </form>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="main.js"></script>
+</body>
+</html>
