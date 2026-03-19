@@ -1,0 +1,318 @@
+
+:root {
+    --color-fondo: #f9fafb;
+    --color-texto: #1f2937;
+    --color-primario: #2027F5; 
+    --color-primario-oscuro: #160db5;
+    --color-premium: #fd027f; /*Color para que aparezca "premium" en los servicios que estén arriba de $1000 */
+    --color-tarjeta: #ffffff;
+    --sombra: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --sombra-fuerte: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* BOTONES GLOBALES */
+.btn-primary, .btn-secundario {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-2px);
+}
+
+.btn-secundario {
+    background-color: transparent;
+    color: var(--color-primario);
+    border: 2px solid var(--color-primario);
+    font-size: 0.9rem;
+    padding: 8px 20px;
+}
+
+.btn-secundario:hover {
+    background-color: rgba(5, 150, 105, 0.05);
+    transform: translateY(-1px);
+}
+
+
+/*Estilos para le index */
+
+/* NAVBAR */
+.navbar {
+    background-color: var(--color-tarjeta);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primario);
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.nav-links a {
+    color: var(--color-texto);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--color-primario);
+}
+
+/* HERO PORTADA */
+.hero-index {
+    background-color: #ecf9fd; /* azul suave */
+    padding: 100px 0;
+    text-align: center;
+    background-image: url(laptop.avif);
+    background-size: cover;
+    border-radius: 20px;
+    margin: 10px 10px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: #ecf9fd;;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: #ecf9fd;;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+/* SECCIÓN EQUIPO */
+.seccion-equipo {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.titulo-seccion {
+    font-size: 2.2rem;
+    color: var(--color-primario);
+    margin-bottom: 10px;
+}
+
+.subtitulo-seccion {
+    color: #4d617d;
+    margin-bottom: 60px;
+}
+
+.grid-equipo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+/* TARJETA MIEMBRO */
+.tarjeta-miembro {
+    background-color: var(--color-tarjeta);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--sombra);
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tarjeta-miembro:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-fuerte);
+}
+
+.foto-perfil {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%; /* para foto circular */
+    object-fit: cover;
+    border: 5px solid #d9f0ff;
+    margin-bottom: 25px;
+}
+
+.info-miembro h3 {
+    font-size: 1.4rem;
+    color: var(--color-texto);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.info-miembro .rol {
+    color: var(--color-primario);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.info-miembro .bio {
+    color: #4b5563;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    text-align: justify;
+    flex-grow: 1;
+}
+
+.info-miembro .btn-secundario {
+    width: 100%;
+    text-align: center;
+}
+
+/* FOOTER PORTADA */
+.footer-index {
+    background-color: #0f0e46; /*azul marino */
+    color: #d1d5db;
+    padding: 50px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-index p {
+    margin-bottom: 10px;
+}
+
+
+/* El Header de la página de servicios */
+header:not(.hero-index) {
+    text-align: center;
+    padding: 100px 0;
+    border-bottom: 1px solid #4d617d;
+    margin-bottom: 60px;
+    background-color: var(--color-tarjeta);
+    background-image: url(design.jpg);
+    background-size: cover;
+    
+    
+}
+
+header:not(.hero-index) h1 {
+    font-size: 2.5rem;
+    color: var(--color-primario);
+    text-shadow: 4px 2px 6px white;
+    margin-bottom: 10px;
+}
+
+header:not(.hero-index) p {
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 2px 0px 6px rgb(0, 0, 0);
+}
+
+/* El Grid de Servicios */
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px 80px;
+}
+
+/* Cada tarjeta del servicio que se ofrece */
+.tarjeta-servicio {
+    background-color: var(--color-tarjeta);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: transform 0.7s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+.tarjeta-servicio:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-fuerte);
+}
+
+.tarjeta-servicio img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.tarjeta-servicio h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-primario);
+    margin-bottom: 10px;
+}
+
+.desc-corta {
+    color: #4b5563;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.precio-servicio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    text-align: right;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 15px;
+}
+
+/* Condicional Premium (> $1000) */
+.servicio-premium {
+    border: 3px solid #f8c4e9;
+}
+
+.servicio-premium .precio-servicio {
+    color: var(--color-premium);
+}
