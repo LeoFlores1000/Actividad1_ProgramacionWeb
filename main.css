@@ -234,7 +234,8 @@ header:not(.hero-index) {
     background-color: var(--color-tarjeta);
     background-image: url(design.jpg);
     background-size: cover;
-    
+    border-radius: 20px;
+    margin:10px 10px;
     
 }
 
@@ -315,4 +316,125 @@ header:not(.hero-index) p {
 
 .servicio-premium .precio-servicio {
     color: var(--color-premium);
+}
+
+/* --- ESTILOS PARA EL FORMULARIO DE ALTA --- */
+
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: var(--color-tarjeta);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--sombra-fuerte);
+}
+
+.form-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-weight: 600;
+    color: var(--color-texto);
+    font-size: 0.9rem;
+}
+
+.campo input, 
+.campo textarea {
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campo input:focus, 
+.campo textarea:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 4px rgba(32, 39, 245, 0.1);
+}
+
+.campo textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Efecto en el botón de Guardar */
+.form-servicios .btn-primary {
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-primario);
+    color: white;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.form-servicios .btn-primary:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-2px);
+}
+
+.form-servicios .btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Contenedor de notificaciones */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Estilo de la alerta */
+.toast {
+    background: #10b981; /* Un verde éxito bonito */
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    min-width: 300px;
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Animación de entrada por la derecha */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Clase para cuando se va a eliminar */
+.toast.fade-out {
+    animation: slideOut 0.5s ease forwards;
+}
+
+@keyframes slideOut {
+    to {
+        transform: translateX(120%);
+        opacity: 0;
+    }
 }

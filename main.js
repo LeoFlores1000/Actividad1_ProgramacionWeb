@@ -1,5 +1,5 @@
 // Contenido de los servicios de tu compañero (Corregido)
-const servicios = [
+let serviciosBase = [
     { nombre: "Páginas web", precio: 1000, descripcion: "Creación de paginas web", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShRo79zgx0A2n-p3m0oUlkIFe6V6Ug030Law&s" },
     { nombre: "Soporte técnico", precio: 300, descripcion: "Reparación de equipos", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn9b35QwFFOZVWuplzWTXJuJXiUFWdXCRC_A&s" },
     { nombre: "Auditorías", precio: 4000, descripcion: "Revisión y mantenimiento a tus servicios", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRKY9W-d0ya3rE295CrXd7Y0FpZQPSLEqqIQ&s" },
@@ -11,18 +11,46 @@ const servicios = [
     { nombre: "Software", precio: 5000, descripcion: "Sistemas de software para empresas (ventas, incentarios, entre otros", imagen: "https://s3.amazonaws.com/www-itopvpn-com/blog/20250411/1744351579624391.png" },
     { nombre: "Redes", precio: 5000, descripcion: "instalación de routers y switches, seguridad en redes", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRlnkXchjyDCsLx4jK3JzOmCILVVX6-5YPKA&s" }
 ];
+let serviciosLocal= JSON.parse(localStorage.getItem('misServicios')) || [];
+let todosLosServicios = [...serviciosBase, ...serviciosLocal];
 // DATOS
 const equipo = [
     {nombre: "Diana Laura Campos Rosas", rol: "Backend developer", bio: "Enfocada en el desarrollo backend y la gestión de bases de datos relacionales.", foto: "foto de perfil - Diana.jpeg"},
     {nombre: "Leonardo Flores Vitela", rol: "Web developer", bio: "Enfocado en el desarrollo de interfaces web atractivas y funcionales.", foto: "foto de perfil - Leo.jpeg"}
 ]
 
+// Sonido de éxito (puedes usar esta URL de un "pop" limpio)
+const sonidoPop = new Audio('https://notificationsounds.com/storage/sounds/file-sounds-1150-pristine.mp3');
+
+function configurarFormulario() {
+    const formulario = document.getElementById('formulario-alta');
+    if (!formulario) return;
+
+    formulario.addEventListener('submit', (e) => {
+        e.preventDefault(); // Evita que la página se recargue
+
+        // Creamos el nuevo objeto
+        const nuevoServicio = {
+            nombre: document.getElementById('nombre').value.trim(),
+            precio: parseFloat(document.getElementById('precio').value.trim()),
+            descripcion: document.getElementById('descripcion').value.trim(),
+            imagen: document.getElementById('imagen').value.trim()
+        };
+
+        // Guardar en el array local y subir a localStorage
+        serviciosLocal.push(nuevoServicio);
+        localStorage.setItem('misServicios', JSON.stringify(serviciosLocal));
+
+        mostrarNotificacion("¡Servicio registrado correctamente!");
+    });
+}
+
 function generarServicios(){
     // Referenciar con base de html
     const contenedor = document.getElementById('contenedor-servicios');
     if (!contenedor) return;
     // Nuestro bucle dinámico
-    servicios.forEach(servicio => {
+    todosLosServicios.forEach(servicio => {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta-servicio';
 
@@ -71,6 +99,7 @@ function generarNav() {
             <div class="nav-links">
                 <a href="index.html" class="${paginaActual === 'index.html' ? 'active' : ''}">Inicio</a>
                 <a href="servicios.html" class="${paginaActual === 'servicios.html' ? 'active' : ''}">Servicios</a>
+                <a href="alta.html" class="${paginaActual === 'alta.html' ? 'active' : ''}">Alta</a>
             </div>
         </div>
     `;
@@ -132,10 +161,38 @@ function generarSeccionEquipo() {
     });
 }
 
+function mostrarNotificacion(mensaje) {
+    const container = document.getElementById('notification-container');
+    if (!container) return;
+
+    sonidoPop.currentTime = 0; // Reinicia el sonido por si acaso
+    sonidoPop.play().catch(error => console.log("El navegador bloqueó el audio inicial:", error));
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+        <span>✅</span>
+        <span>${mensaje}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // Quitamos la alerta después de 3 segundos
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        toast.addEventListener('animationend', () => {
+            toast.remove();
+            // Redireccionamos DESPUÉS de que se vea la animación
+            window.location.href = "servicios.html";
+        });
+    }, 2500);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     generarNav();
     generarHeader();
     generarSeccionEquipo();
     generarServicios();
     generarFooter();
+    configurarFormulario();
 });
